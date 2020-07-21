@@ -30,6 +30,7 @@ namespace ServeralControlPrac
             cb2.Location = new Point(10, 40);
             cb3.Location = new Point(10, 70);
             btn.Location = new Point(10, 100);
+            btn.Name = "check";
 
             btn.Click += ButtonClick;
             Controls.Add(cb1);
@@ -37,12 +38,65 @@ namespace ServeralControlPrac
             Controls.Add(cb3);
             Controls.Add(btn);
 
+
+            RadioButton rb1 = new RadioButton();
+            RadioButton rb2 = new RadioButton();
+            RadioButton rb3 = new RadioButton();
+            Button btn2 = new Button();
+
+            rb1.Text = "감자";
+            rb2.Text = "고구마";
+            rb3.Text = "토마토";
+            btn2.Text = "클릭";
+            btn2.Name = "radio";
+
+            rb1.Location = new Point(140, 10);
+            rb2.Location = new Point(140, 40);
+            rb3.Location = new Point(140, 70);
+            btn2.Location = new Point(140, 100);
+            btn2.Click += ButtonClick;
+            btn2.Click += ButtonClick;
+
+            Controls.Add(rb1);
+            Controls.Add(rb2);
+            Controls.Add(rb3);
+            Controls.Add(btn2);
+
         }
 
         private void ButtonClick(object sender, EventArgs e)
         {
+            Button btn = (Button)sender;
+
+            switch (btn.Name)
+            {
+                case "check":
+                    ShowCheckboxResult();
+                    break;
+                case "radio":
+                    ShowRadioResult();
+                    break;
+            }
+        }
+
+
+        private void ShowRadioResult()
+        {
+            foreach (var item in Controls)
+            {
+                RadioButton rb = item as RadioButton;
+                if (rb != null && rb.Checked)
+                {
+                    MessageBox.Show(rb.Text);
+                }
+            }
+        }
+
+        private void ShowCheckboxResult()
+        {
+
             List<string> list = new List<string>();
-            foreach(var item in Controls)
+            foreach (var item in Controls)
             {
                 CheckBox cb = item as CheckBox;
                 if (cb != null && cb.Checked)
@@ -59,6 +113,7 @@ namespace ServeralControlPrac
                     }
                 }*/
             }
+
             MessageBox.Show(string.Join(",", list));
         }
 
